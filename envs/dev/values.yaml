@@ -1,0 +1,12 @@
+metadata:
+  name: team-capstone-app-devs
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: team-capstone-app-devs
+  source:
+    repoURL: https://github.com/aws-samples/eks-blueprints-workloads
+    targetRevision: main
+    path: teams/capstone-app-devs/dev
+  ingress:
+    host: dev.example.com
