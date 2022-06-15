@@ -13,7 +13,7 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: https://github.com/tusharf5/capstone-project-apps-monorepo.git # Can point to either a Helm chart repo or a git repo.
+    repoURL: { { .Values.spec.source.repoURL } } # Can point to either a Helm chart repo or a git repo.
     targetRevision: { { .Values.spec.source.targetRevision } } # For Helm, this refers to the chart version.
     path: { { .Values.spec.source.path } } # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
 
