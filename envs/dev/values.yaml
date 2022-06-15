@@ -1,3 +1,5 @@
+metadata:
+  name: team-capstone-app-devs
 spec:
   destination:
     server: https://kubernetes.default.svc
