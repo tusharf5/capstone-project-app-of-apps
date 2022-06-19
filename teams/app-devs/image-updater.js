@@ -4,10 +4,10 @@ const fs = require("fs");
 
 const required_env_variables = [
   {
-    envVarName: "SERVICE_A_LATEST_TAG",
-    filePath: "./dev/values.yaml",
-    keyPath: ["services", "service_a"],
-    key: "IMAGE_TAG",
+    envVarName: "SERVICE_A_DOCKER_IMAGE",
+    filePath: "./dev/templates/service-a/app.yaml",
+    keyPath: ["spec", "template", "spec", "containers", 0],
+    key: "image",
   },
 ];
 
@@ -32,9 +32,13 @@ try {
 
     ref[toReplace.key] = process.env[toReplace.envVarName];
 
-    fs.writeFileSync(path.join(__dirname, toReplace.filePath), yaml.dump(doc), {
-      encoding: "utf-8",
-    });
+    fs.writeFileSync(
+      path.join(__dirname, toReplace.filePath),
+      yaml.dump(doc, {lineWidth: -1}),
+      {
+        encoding: "utf-8",
+      }
+    );
   }
 } catch (e) {
   console.log(e);

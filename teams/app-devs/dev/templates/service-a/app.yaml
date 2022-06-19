@@ -14,7 +14,7 @@ spec:
         app: service-a
     spec:
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-service-a:{{.Values.services.service_a.IMAGE_TAG}}
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-service-a:956e8a8b320e25eeaf2b1ba7e35d591ff8755a0c
           name: service-a
           resources:
             limits:
