@@ -58,7 +58,6 @@ export class CiStack extends Stack {
           "cd teams/app-devs/ci",
           "yarn install",
           "npx cdk synth",
-          "mv ../../../config.zip ./cdk.out",
         ],
         primaryOutputDirectory: "teams/app-devs/ci/cdk.out",
       }),
@@ -67,7 +66,7 @@ export class CiStack extends Stack {
     const trigger = new pipelines.CodeBuildStep("update-files-and-commit", {
       input: sourceArtifact,
       additionalInputs: {
-        "config.zip": s3Source,
+        runtime_config: s3Source,
       },
       rolePolicyStatements: [
         new cdk.aws_iam.PolicyStatement({
@@ -100,7 +99,7 @@ export class CiStack extends Stack {
         `git clone --depth 1 -b ${props.branch} https://github.com/tusharf5/capstone-project-app-of-apps.git repo`,
         `ls`,
         `pwd`,
-        `unzip config.zip -d repo/teams/app-devs`,
+        `mv runtime_config/config.json repo/teams/app-devs`,
         `cd repo/teams/app-devs`,
         `pwd`,
         `ls`,
