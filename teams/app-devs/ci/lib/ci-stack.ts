@@ -58,15 +58,13 @@ export class CiStack extends Stack {
           "cd teams/app-devs/ci",
           "yarn install",
           "npx cdk synth",
+          "mv config.zip ./cdk.out",
         ],
         primaryOutputDirectory: "teams/app-devs/ci/cdk.out",
       }),
     });
 
     const trigger = new pipelines.ShellStep("update-files-and-commit", {
-      additionalInputs: {
-        "config.zip": s3Source,
-      },
       commands: [`echo "I will trigger another pipeline "`, "ls"],
     });
 
