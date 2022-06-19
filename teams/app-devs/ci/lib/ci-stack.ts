@@ -94,6 +94,8 @@ export class CiStack extends Stack {
         `chmod 600 ~/.ssh/id_rsa`,
         `ssh-keygen -F github.com || ssh-keyscan github.com >>~/.ssh/known_hosts`,
         `git config --global url."git@github.com:".insteadOf "https://github.com/"`,
+        `git config --global user.email "codepipeline@amazon.com"`,
+        `git config --global user.name "CodePipeline"`,
         `mkdir repo`,
         `pwd`,
         `git clone --depth 1 -b ${props.branch} https://github.com/tusharf5/capstone-project-app-of-apps.git repo`,
@@ -107,9 +109,9 @@ export class CiStack extends Stack {
         `yarn install`,
         `node image-updater.js`,
         `rm config.json`,
-        `git add .`,
+        `git add ${props.stage}`,
         `git commit -m "Updated By Pipeline"`,
-        `git push ${props.branch}`,
+        `git push origin ${props.branch}`,
       ],
     });
 
