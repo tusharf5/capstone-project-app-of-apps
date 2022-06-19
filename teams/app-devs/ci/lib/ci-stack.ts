@@ -110,8 +110,8 @@ export class CiStack extends Stack {
         `node image-updater.js`,
         `rm config.json`,
         `git add ${props.stage}`,
-        `git commit -m "Updated By Pipeline"`,
-        `git push origin ${props.branch}`,
+        `git commit -m "Updated By Pipeline" || echo "Nothing to commit"`,
+        `git push origin ${props.branch} || echo "Nothing to push"`,
       ],
     });
 
