@@ -7,6 +7,6 @@ spec:
   source:
     repoURL: https://github.com/tusharf5/capstone-project-apps-monorepo
     targetRevision: main
-    path: teams/capstone-app-devs/dev
+    path: teams/app-devs/dev
   ingress:
     host: dev.example.com
