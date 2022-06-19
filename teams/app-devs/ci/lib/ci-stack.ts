@@ -58,7 +58,7 @@ export class CiStack extends Stack {
           "cd teams/app-devs/ci",
           "yarn install",
           "npx cdk synth",
-          "mv config.zip ./cdk.out",
+          "mv ../../../config.zip ./cdk.out",
         ],
         primaryOutputDirectory: "teams/app-devs/ci/cdk.out",
       }),
