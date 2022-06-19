@@ -65,6 +65,10 @@ export class CiStack extends Stack {
     });
 
     const trigger = new pipelines.ShellStep("update-files-and-commit", {
+      input: sourceArtifact,
+      additionalInputs: {
+        "config.zip": s3Source,
+      },
       commands: [`echo "I will trigger another pipeline "`, "ls"],
     });
 
