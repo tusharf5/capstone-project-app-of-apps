@@ -5,8 +5,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: team-capstone-app-devs
   source:
-    repoURL: https://github.com/tusharf5/capstone-project-app-of-apps
+    repoURL: https://github.com/tusharf5/capstone-project-apps-monorepo
     targetRevision: main
-    path: teams/app-devs/dev
+    path: teams/capstone-app-devs/dev
   ingress:
     host: dev.example.com
