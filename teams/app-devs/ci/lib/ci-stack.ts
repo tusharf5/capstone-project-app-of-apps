@@ -38,7 +38,7 @@ export class CiStack extends Stack {
 
     const s3Source = CodePipelineSource.s3(
       bucket,
-      `${props.stage}/service-a/config.json`,
+      `${props.stage}/service-a/config.zip`,
       {
         trigger: S3Trigger.EVENTS,
         actionName: "retreive-latest-config",
@@ -50,10 +50,11 @@ export class CiStack extends Stack {
       synth: new ShellStep("Synth", {
         input: sourceArtifact,
         additionalInputs: {
-          "./dynamic-config": s3Source,
+          "config.zip": s3Source,
         },
         commands: [
           'echo "Synth commands"',
+          "ls",
           "cd teams/app-devs/ci",
           "yarn install",
           "npx cdk synth",
@@ -63,8 +64,12 @@ export class CiStack extends Stack {
     });
 
     const trigger = new pipelines.ShellStep("update-files-and-commit", {
-      input: s3Source,
-      commands: ['echo " I will trigger another pipeline "', "ls"],
+      additionalInputs: {
+        "config.zip": s3Source,
+      },
+      commands: [`echo "I will trigger another pipeline "`, "ls"],
     });
+
+    pipeline.addWave("update-files-and-commit").addPre(trigger);
   }
 }
