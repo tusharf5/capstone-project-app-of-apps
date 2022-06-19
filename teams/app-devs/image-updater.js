@@ -1,17 +1,20 @@
 const yaml = require("js-yaml");
 const path = require("path");
 const fs = require("fs");
+const configFile = require("./config.json");
 
 const required_env_variables = [
   {
-    envVarName: "SERVICE_A_DOCKER_IMAGE",
+    configPath: ["serviceA", "dockerImageURI"],
     filePath: "./dev/templates/service-a/app.yaml",
     keyPath: ["spec", "template", "spec", "containers", 0],
     key: "image",
   },
 ];
 
+
 try {
+
   for (let toReplace of required_env_variables) {
     const doc = yaml.load(
       fs.readFileSync(path.join(__dirname, toReplace.filePath), "utf8")
@@ -22,15 +25,15 @@ try {
       ref = ref[field];
     }
 
-    if (!process.env[toReplace.envVarName]) {
-      throw new Error(
-        `${toReplace.envVarName} is not present. Curr Value is ${
-          process.env[toReplace.envVarName]
-        }`
-      );
+    let configRef = configFile;
+
+    for (let field of toReplace.configPath) {
+      configRef = configRef[field];
     }
 
-    ref[toReplace.key] = process.env[toReplace.envVarName];
+    console.log(configRef);
+
+    ref[toReplace.key] = configRef;
 
     fs.writeFileSync(
       path.join(__dirname, toReplace.filePath),

@@ -64,12 +64,50 @@ export class CiStack extends Stack {
       }),
     });
 
-    const trigger = new pipelines.ShellStep("update-files-and-commit", {
+    const trigger = new pipelines.CodeBuildStep("update-files-and-commit", {
       input: sourceArtifact,
       additionalInputs: {
         "config.zip": s3Source,
       },
-      commands: [`echo "I will trigger another pipeline "`, "ls"],
+      rolePolicyStatements: [
+        new cdk.aws_iam.PolicyStatement({
+          resources: [
+            `arn:aws:secretsmanager:${props.env!.region}:${
+              props.env!.account
+            }:secret:github-ssh-key-MD2h9J`,
+            `arn:aws:secretsmanager:${props.env!.region}:${
+              props.env!.account
+            }:secret:github-ssh-key-public-KaBZ7z`,
+          ],
+          actions: [
+            "secretsmanager:GetSecretValue",
+            "secretsmanager:GetResourcePolicy",
+            "secretsmanager:DescribeSecret",
+            "secretsmanager:ListSecretVersionIds",
+          ],
+          effect: cdk.aws_iam.Effect.ALLOW,
+        }),
+      ],
+      commands: [
+        `build_ssh_key=$(aws secretsmanager get-secret-value --secret-id "github-ssh-key" --output text --query SecretString)`,
+        `mkdir -p ~/.ssh`,
+        `echo "$build_ssh_key" > ~/.ssh/id_rsa`,
+        `chmod 600 ~/.ssh/id_rsa`,
+        `ssh-keygen -F github.com || ssh-keyscan github.com >>~/.ssh/known_hosts`,
+        `git config --global url."git@github.com:".insteadOf "https://github.com/"`,
+        `mkdir repo`,
+        `git clone --depth 1 -b ${props.branch} https://github.com/tusharf5/capstone-project-app-of-apps.git repo`,
+        `unzip config.zip -d repo/teams/app-devs`,
+        `cd repo/teams/app-devs`,
+        `ls`,
+        `cat config.json`,
+        `yarn install`,
+        `node image-updater.js`,
+        `rm config.json`,
+        `git add .`,
+        `git commit -m "Updated By Pipeline"`,
+        `git push ${props.branch}`,
+      ],
     });
 
     pipeline.addWave("update-files-and-commit").addPre(trigger);
