@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+  template:
+    metadata:
+      labels:
+        service: service-a
+        app: service-a
+    spec:
+      containers:
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-service-a:{{.Values.services.service_a.IMAGE_TAG}}
+          name: service-a
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi

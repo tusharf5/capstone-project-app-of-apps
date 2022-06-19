@@ -10,3 +10,6 @@ spec:
     path: teams/app-devs/dev
   ingress:
     host: dev.example.com
+services:
+  service_a:
+    IMAGE_TAG: 956e8a8b320e25eeaf2b1ba7e35d591ff8755a0c
