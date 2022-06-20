@@ -80,9 +80,7 @@ export class CiStack extends Stack {
     });
 
     const trigger = new pipelines.CodeBuildStep("update-files-and-commit", {
-      additionalInputs: {
-        runtime_config: s3Source,
-      },
+      input: s3Source,
       rolePolicyStatements: [
         new cdk.aws_iam.PolicyStatement({
           resources: [
@@ -103,6 +101,7 @@ export class CiStack extends Stack {
         }),
       ],
       commands: [
+        `ls`,
         `build_ssh_key=$(aws secretsmanager get-secret-value --secret-id "github-ssh-key" --output text --query SecretString)`,
         `mkdir -p ~/.ssh`,
         `echo "$build_ssh_key" > ~/.ssh/id_rsa`,
