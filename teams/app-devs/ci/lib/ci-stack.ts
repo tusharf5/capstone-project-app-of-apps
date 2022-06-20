@@ -71,7 +71,6 @@ export class CiStack extends Stack {
           `git config --global user.name "CodePipeline"`,
           `mkdir repo`,
           `git clone --depth 1 -b ${props.branch} https://github.com/tusharf5/capstone-project-app-of-apps.git repo`,
-          `mv runtime_config/config.json repo/teams/app-devs`,
           "cd repo/teams/app-devs/ci",
           "yarn install",
           "npx cdk synth",
