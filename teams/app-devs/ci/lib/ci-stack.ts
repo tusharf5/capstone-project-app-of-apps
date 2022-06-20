@@ -101,7 +101,6 @@ export class CiStack extends Stack {
         }),
       ],
       commands: [
-        `ls`,
         `build_ssh_key=$(aws secretsmanager get-secret-value --secret-id "github-ssh-key" --output text --query SecretString)`,
         `mkdir -p ~/.ssh`,
         `echo "$build_ssh_key" > ~/.ssh/id_rsa`,
@@ -112,7 +111,7 @@ export class CiStack extends Stack {
         `git config --global user.name "CodePipeline"`,
         `mkdir repo`,
         `git clone --depth 1 -b ${props.branch} https://github.com/tusharf5/capstone-project-app-of-apps.git repo`,
-        `mv runtime_config/config.json repo/teams/app-devs`,
+        `mv config.json repo/teams/app-devs`,
         `cd repo/teams/app-devs`,
         `yarn install`,
         `node image-updater.js`,
