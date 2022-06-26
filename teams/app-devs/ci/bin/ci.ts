@@ -2,6 +2,7 @@
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { CiStack } from "../lib/ci-stack";
+import { CiTriggerStack } from "../lib/ci-trigger-stack";
 
 const app = new cdk.App();
 
@@ -28,7 +29,7 @@ const environments = {
   },
 };
 
-new CiStack(app, "app-of-apps-apps-devs-ci-dev", {
+const devStack = new CiStack(app, "app-of-apps-apps-devs-ci-dev", {
   stage: environments.dev.name,
   env: {
     region: environments.dev.region,
@@ -36,6 +37,17 @@ new CiStack(app, "app-of-apps-apps-devs-ci-dev", {
   },
   branch: "main",
 });
+
+new CiTriggerStack(app, "trigger-app-of-apps-apps-devs-ci-dev", {
+  stage: environments.dev.name,
+  env: {
+    region: environments.dev.region,
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+  },
+}).addDependency(
+  devStack,
+  "Depends on codepipeline defined in this stack to be built"
+);
 
 new CiStack(app, "app-of-apps-apps-devs-ci-test", {
   stage: environments.test.name,
