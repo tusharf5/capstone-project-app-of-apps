@@ -97,6 +97,11 @@
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",
     "yaml.format.singleQuote": true,
-    "yaml.validate": false
+    "yaml.validate": false,
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#0D2A66",
+      "titleBar.activeBackground": "#123B8E",
+      "titleBar.activeForeground": "#F7FAFE"
+    }
   }
 }
