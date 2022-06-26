@@ -8,8 +8,11 @@ import {
 } from "aws-cdk-lib/pipelines";
 import * as cdk from "aws-cdk-lib";
 import * as pipelines from "aws-cdk-lib/pipelines";
+import * as cloudtrail from "aws-cdk-lib/aws-cloudtrail";
+import * as targets from "aws-cdk-lib/aws-events-targets";
 
 import { S3Trigger } from "aws-cdk-lib/aws-codepipeline-actions";
+import { AddEventSelectorOptions } from "aws-cdk-lib/aws-cloudtrail";
 
 interface CiStackProps extends StackProps {
   stage: string;
@@ -35,6 +38,23 @@ export class CiStack extends Stack {
         trigger: S3Trigger.EVENTS,
         actionName: "retreive-latest-config",
       }
+    );
+
+    const trail = new cloudtrail.Trail(this, "CloudTrail");
+
+    const options: AddEventSelectorOptions = {
+      readWriteType: cloudtrail.ReadWriteType.WRITE_ONLY,
+    };
+
+    // Adds an event selector to the bucket
+    trail.addS3EventSelector(
+      [
+        {
+          bucket: bucket, // 'Bucket' is of type s3.IBucket,
+          objectPrefix: `${props.stage}/service-a`,
+        },
+      ],
+      options
     );
 
     const pipeline = new CodePipeline(this, "synth-sources", {
@@ -77,6 +97,10 @@ export class CiStack extends Stack {
         ],
         primaryOutputDirectory: "repo/teams/app-devs/ci/cdk.out",
       }),
+    });
+
+    bucket.onCloudTrailWriteObject("PipelineTrigger", {
+      target: new targets.CodePipeline(pipeline.pipeline, {}),
     });
 
     const trigger = new pipelines.CodeBuildStep("update-files-and-commit", {
