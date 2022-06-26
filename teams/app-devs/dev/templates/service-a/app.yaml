@@ -23,6 +23,18 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /health-status
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3    
+          startupProbe:
+            httpGet:
+              path: /health-status
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10                      
 ---
 apiVersion: v1
 kind: Service
