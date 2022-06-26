@@ -18,11 +18,11 @@ spec:
           name: service-a
           resources:
             limits:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 50m
+              memory: 100Mi
             requests:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 50m
+              memory: 100Mi
           livenessProbe:
             httpGet:
               path: /health-status
@@ -48,7 +48,7 @@ spec:
   selector:
     app: service-a
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: service-a
@@ -59,10 +59,14 @@ metadata:
   labels:
     app: service-a
 spec:
+  ingressClassName: alb
   rules:
     - http:
         paths:
-          - path: /bff/*
+          - path: /bff
+            pathType: Prefix
             backend:
-              serviceName: service-a
-              servicePort: 8080
+              service:
+                name: service-a
+                port:
+                  number: 8080
