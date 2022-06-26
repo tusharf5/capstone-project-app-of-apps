@@ -23,3 +23,33 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  type: NodePort
+  selector:
+    app: service-a
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: service-a
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: service-a
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /bff/*
+            backend:
+              serviceName: service-a
+              servicePort: 8080
