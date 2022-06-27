@@ -5,6 +5,10 @@
       "path": "../"
     },
     {
+      "name": "@@team-app-devs/argocd/dev",
+      "path": "../envs/dev"
+    },
+    {
       "name": "@@team-app-devs/ci",
       "path": "../teams/app-devs/ci"
     },
