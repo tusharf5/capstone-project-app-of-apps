@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +15,7 @@ spec:
         app: bff-api
     spec:
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:de262432a890be4e70e544a8665eed498327eca0
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:95ef039f265a99967720f8aae2388903de16aa02
           name: bff-api
           resources:
             limits:
@@ -28,13 +29,13 @@ spec:
               path: /health-status
               port: 8080
             initialDelaySeconds: 3
-            periodSeconds: 3    
+            periodSeconds: 3
           startupProbe:
             httpGet:
               path: /health-status
               port: 8080
             failureThreshold: 30
-            periodSeconds: 10                      
+            periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
