@@ -78,4 +78,5 @@ try {
   }
 } catch (e) {
   console.log(e);
+  throw e;
 }
