@@ -5,16 +5,14 @@ const configFile = require("./config.json");
 
 const required_env_variables = [
   {
-    configPath: ["serviceA", "dockerImageURI"],
-    filePath: "./dev/templates/service-a/app.yaml",
+    configPath: ["bffApi", "dockerImageURI"],
+    filePath: "./dev/templates/bff-api/app.yaml",
     keyPath: ["spec", "template", "spec", "containers", 0],
     key: "image",
   },
 ];
 
-
 try {
-
   for (let toReplace of required_env_variables) {
     const doc = yaml.load(
       fs.readFileSync(path.join(__dirname, toReplace.filePath), "utf8")

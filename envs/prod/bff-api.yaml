@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://github.com/tusharf5/capstone-project-apps-monorepo.git # Can point to either a Helm chart repo or a git repo.
     targetRevision: prod # For Helm, this refers to the chart version.
-    path: service-a # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
+    path: bff-api # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
 
     # helm specific config
     # chart: chart-name  # Set this when pulling directly from a Helm repo. DO NOT set for git-hosted Helm charts.
@@ -103,7 +103,7 @@ spec:
   # Destination cluster and namespace to deploy the application
   destination:
     server: https://kubernetes.default.svc
-    namespace: service-a-prod
+    namespace: bff-api-prod
 
   # Sync policy
   syncPolicy:

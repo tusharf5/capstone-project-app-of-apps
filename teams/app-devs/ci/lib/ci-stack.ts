@@ -25,7 +25,7 @@ export class CiStack extends Stack {
 
     const s3Source = CodePipelineSource.s3(
       bucket,
-      `${props.stage}/service-a/config.zip`,
+      `${props.stage}/bff-api/config.zip`,
       {
         trigger: S3Trigger.EVENTS,
         actionName: "retreive-latest-config",

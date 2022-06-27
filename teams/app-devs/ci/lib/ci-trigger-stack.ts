@@ -43,7 +43,7 @@ export class CiTriggerStack extends Stack {
       [
         {
           bucket: bucket, // 'Bucket' is of type s3.IBucket,
-          objectPrefix: `${props.stage}/service-a`,
+          objectPrefix: `${props.stage}/bff-api`,
         },
       ],
       options

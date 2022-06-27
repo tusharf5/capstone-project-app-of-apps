@@ -5,11 +5,15 @@
       "path": "../"
     },
     {
-      "name": "@@app-devs/ci",
+      "name": "@@team-app-devs/ci",
       "path": "../teams/app-devs/ci"
     },
     {
-      "name": "@@app-devs",
+      "name": "@@team-app-devs/helm/dev",
+      "path": "../teams/app-devs/dev"
+    },
+    {
+      "name": "@@team-app-devs/image-updater",
       "path": "../teams/app-devs"
     }
   ],

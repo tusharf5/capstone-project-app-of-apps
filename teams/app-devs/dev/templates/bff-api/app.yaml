@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-a
+  name: bff-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: service-a
+      app: bff-api
   template:
     metadata:
       labels:
-        service: service-a
-        app: service-a
+        service: bff-api
+        app: bff-api
     spec:
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-service-a:de262432a890be4e70e544a8665eed498327eca0
-          name: service-a
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:de262432a890be4e70e544a8665eed498327eca0
+          name: bff-api
           resources:
             limits:
               cpu: 50m
@@ -39,25 +39,25 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-a
+  name: bff-api
 spec:
   ports:
     - port: 8080
       protocol: TCP
   type: NodePort
   selector:
-    app: service-a
+    app: bff-api
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: service-a
+  name: bff-api
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/group.name: capstone
   labels:
-    app: service-a
+    app: bff-api
 spec:
   ingressClassName: alb
   rules:
@@ -67,6 +67,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: service-a
+                name: bff-api
                 port:
                   number: 8080
