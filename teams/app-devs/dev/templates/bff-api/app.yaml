@@ -60,7 +60,6 @@ metadata:
   labels:
     app: bff-api
 spec:
-  ingressClassName: alb
   rules:
     - http:
         paths:
