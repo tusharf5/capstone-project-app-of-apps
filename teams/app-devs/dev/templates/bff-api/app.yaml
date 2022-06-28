@@ -74,4 +74,4 @@ spec:
               service:
                 name: bff-api
                 port:
-                  name: 8080
+                  number: 8080
