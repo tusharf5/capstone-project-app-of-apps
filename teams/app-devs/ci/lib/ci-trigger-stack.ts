@@ -24,15 +24,13 @@ export class CiTriggerStack extends Stack {
   constructor(scope: Construct, id: string, props: CiStackProps) {
     super(scope, id, props);
 
-    const pipelineArn = cdk.Fn.importValue("AppDevCiPipelineArn");
-
     const bucket = cdk.aws_s3.Bucket.fromBucketName(
       this,
       "CodePipelineAssetsBucket",
       "capstone-tusharf5-pipeline-assets-bucket"
     );
 
-    const trail = new cloudtrail.Trail(this, "CloudTrail");
+    const trail = new cloudtrail.Trail(this, "S3AssetsCloudTrail");
 
     const options: AddEventSelectorOptions = {
       readWriteType: cloudtrail.ReadWriteType.WRITE_ONLY,
