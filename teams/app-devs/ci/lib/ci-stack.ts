@@ -11,6 +11,7 @@ interface CiStackProps extends StackProps {
   branch: string;
 }
 
+// TODO Add Trigger Stack as STage
 // Docs at https://www.npmjs.com/package/@aws-cdk/pipelines
 
 export class CiStack extends Stack {
