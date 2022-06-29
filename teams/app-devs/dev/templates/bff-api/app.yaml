@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: bff-api
 spec:
-  replicas: 10
+  replicas: 100
   selector:
     matchLabels:
       app: bff-api
