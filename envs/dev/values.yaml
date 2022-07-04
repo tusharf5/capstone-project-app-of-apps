@@ -1,12 +1,13 @@
-metadata:
-  name: team-capstone-app-devs
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: team-capstone-app-devs
-  source:
-    repoURL: https://github.com/tusharf5/capstone-project-app-of-apps
-    targetRevision: main
-    path: teams/app-devs/dev
-  ingress:
-    host: dev.example.com
+teams:
+  frontend:
+    metadata:
+      name: team-frontend
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: team-frontend
+      source:
+        repoURL: https://github.com/tusharf5/capstone-project-app-of-apps
+        targetRevision: main
+        path: teams/frontend/dev
+    apps:
+      bff: ''

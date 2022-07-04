@@ -5,13 +5,14 @@ import * as cdk from "aws-cdk-lib";
 import * as pipelines from "aws-cdk-lib/pipelines";
 
 import { S3Trigger } from "aws-cdk-lib/aws-codepipeline-actions";
+import { CiTriggerStack } from "./ci-trigger-stack";
+import { CiTriggerStage } from "./ci-trigger-stage";
 
 interface CiStackProps extends StackProps {
   stage: string;
   branch: string;
 }
 
-// TODO Add Trigger Stack as STage
 // Docs at https://www.npmjs.com/package/@aws-cdk/pipelines
 
 export class CiStack extends Stack {
@@ -21,12 +22,12 @@ export class CiStack extends Stack {
     const bucket = cdk.aws_s3.Bucket.fromBucketName(
       this,
       "CodePipelineAssetsBucket",
-      "capstone-tusharf5-pipeline-assets-bucket"
+      `capstone-tusharf5-pipeline-assets-bucket-${props.stage}`
     );
 
     const s3Source = CodePipelineSource.s3(
       bucket,
-      `${props.stage}/bff-api/config.zip`,
+      `frontend/apps/bff-api/config.zip`,
       {
         trigger: S3Trigger.EVENTS,
         actionName: "retreive-latest-config",
@@ -34,7 +35,7 @@ export class CiStack extends Stack {
     );
 
     const pipeline = new CodePipeline(this, "synth-sources", {
-      pipelineName: `${props.stage}-app-of-apps-app-devs-pipeline`,
+      pipelineName: `${props.stage}-argocd-apps-team-frontend`,
       synth: new pipelines.CodeBuildStep("Synth", {
         input: s3Source,
         rolePolicyStatements: [
@@ -74,6 +75,14 @@ export class CiStack extends Stack {
         primaryOutputDirectory: "repo/teams/app-devs/ci/cdk.out",
       }),
     });
+
+    const triggerStage = new CiTriggerStage(
+      this,
+      "trigger-pipeline-frontend",
+      props
+    );
+
+    pipeline.addStage(triggerStage);
 
     const trigger = new pipelines.CodeBuildStep("update-files-and-commit", {
       input: s3Source,

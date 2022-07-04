@@ -15,7 +15,7 @@ spec:
         app: bff-api
     spec:
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:de14684309e9fff956f2ecc2073a43f4ae07a466
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:5fe0bf6d661d4a073c9172a8d8af582d23137d9d
           name: bff-api
           resources:
             limits:

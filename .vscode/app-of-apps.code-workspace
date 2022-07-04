@@ -5,20 +5,20 @@
       "path": "../"
     },
     {
-      "name": "@@team-app-devs/argocd/dev",
+      "name": "@@argocd/dev",
       "path": "../envs/dev"
     },
     {
-      "name": "@@team-app-devs/ci",
-      "path": "../teams/app-devs/ci"
+      "name": "@@frontend/helm/ci",
+      "path": "../teams/frontend/ci"
     },
     {
-      "name": "@@team-app-devs/helm/dev",
-      "path": "../teams/app-devs/dev"
+      "name": "@@frontend/helm/dev",
+      "path": "../teams/frontend/dev"
     },
     {
-      "name": "@@team-app-devs/image-updater",
-      "path": "../teams/app-devs"
+      "name": "@@frontend/image-updater",
+      "path": "../teams/frontend"
     }
   ],
   "settings": {

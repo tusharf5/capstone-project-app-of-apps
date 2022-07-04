@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{.Values.metadata.name}}
+  name: {{.Values.teams.frontend.metadata.name}}
   # You'll usually want to add your resources to the argocd namespace.
   namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
@@ -13,9 +13,9 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: {{.Values.spec.source.repoURL}} # Can point to either a Helm chart repo or a git repo.
-    targetRevision: {{.Values.spec.source.targetRevision}} # For Helm, this refers to the chart version.
-    path: {{.Values.spec.source.path}} # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
+    repoURL: {{.Values.teams.frontend.metadata.source.repoURL}} # Can point to either a Helm chart repo or a git repo.
+    targetRevision: {{.Values.teams.frontend.metadata.source.targetRevision}} # For Helm, this refers to the chart version.
+    path: {{.Values.teams.frontend.metadata.source.path}} # This has no meaning for Helm charts pulled directly from a Helm repo instead of git.
 
     # helm specific config
     # chart: chart-name  # Set this when pulling directly from a Helm repo. DO NOT set for git-hosted Helm charts.
@@ -102,8 +102,8 @@ spec:
 
   # Destination cluster and namespace to deploy the application
   destination:
-    server: {{.Values.spec.destination.server}}
-    namespace: {{.Values.spec.destination.namespace}}
+    server: {{.Values.teams.frontend.metadata.destination.server}}
+    namespace: {{.Values.teams.frontend.metadata.destination.namespace}}
 
   # Sync policy
   syncPolicy:
