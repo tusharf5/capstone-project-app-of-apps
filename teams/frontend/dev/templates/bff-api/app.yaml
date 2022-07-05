@@ -24,7 +24,7 @@ spec:
     spec:
       serviceAccountName: bff-api-pods-sa
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:e66f5fa3a67a49945e89ce645e7ec09115287ce3
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:e7b057a1397068ac28641a4751eac44d360aeaf3
           name: bff-api
           resources:
             limits:
