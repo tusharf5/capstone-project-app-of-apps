@@ -4,7 +4,7 @@ kind: ServiceAccount
 metadata:
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::360300935709:role/bff-api-resources-core-st-podserviceaccountlinkedr-1HTPJ6BYS04I4
-    eks.amazonaws.com/sts-regional-endpoints: "true"
+    eks.amazonaws.com/sts-regional-endpoints: 'true'
   name: bff-api-pods-sa
 ---
 apiVersion: apps/v1
@@ -24,7 +24,7 @@ spec:
     spec:
       serviceAccountName: bff-api-pods-sa
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:5fe0bf6d661d4a073c9172a8d8af582d23137d9d
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:e66f5fa3a67a49945e89ce645e7ec09115287ce3
           name: bff-api
           resources:
             limits:
