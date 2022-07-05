@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
-import {CiStack} from "../lib/ci-stack";
-import {CiTriggerStack} from "../lib/ci-trigger-stack";
+import { CiStack } from "../lib/ci-stack";
+import { CiTriggerStack } from "../lib/ci-trigger-stack";
 
 const app = new cdk.App();
 
@@ -29,7 +29,7 @@ const environments = {
   },
 };
 
-const devStack = new CiStack(app, "argocd-apps-team-frontend-dev", {
+const devStack = new CiStack(app, "argocd-team-frontend-dev", {
   stage: environments.dev.name,
   env: {
     region: environments.dev.region,
