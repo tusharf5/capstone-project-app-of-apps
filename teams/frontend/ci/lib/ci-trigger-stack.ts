@@ -27,7 +27,7 @@ export class CiTriggerStack extends cdk.Stack {
     const bucket = cdk.aws_s3.Bucket.fromBucketName(
       this,
       "CodePipelineAssetsBucket",
-      `capstone-tusharf5-pipeline-assets-bucket-${props.stage}`
+      `capstone-tusharf5-assets-bucket-${props.stage}`
     );
 
     const trail = new cloudtrail.Trail(this, "S3AssetsCloudTrail");
