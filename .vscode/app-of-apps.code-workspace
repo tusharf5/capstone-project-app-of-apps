@@ -5,15 +5,15 @@
       "path": "../"
     },
     {
-      "name": "@@argocd/dev",
+      "name": "@@argocd-app-def/dev",
       "path": "../envs/dev"
     },
     {
-      "name": "@@frontend/helm/ci",
+      "name": "@@frontend/cdk/gitops",
       "path": "../teams/frontend/ci"
     },
     {
-      "name": "@@frontend/helm/dev",
+      "name": "@@frontend/apps-manifests",
       "path": "../teams/frontend/dev"
     },
     {
