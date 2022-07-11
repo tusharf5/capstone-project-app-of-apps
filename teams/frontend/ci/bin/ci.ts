@@ -29,7 +29,7 @@ const environments = {
   },
 };
 
-const devStack = new CiStack(app, "argocd-team-frontend-dev", {
+const devStack = new CiStack(app, "team-frontend-helm-app-of-apps", {
   stage: environments.dev.name,
   env: {
     region: environments.dev.region,
@@ -37,34 +37,5 @@ const devStack = new CiStack(app, "argocd-team-frontend-dev", {
   },
   branch: "main",
 });
-
-// new CiTriggerStack(app, "trigger-app-of-apps-apps-devs-ci-dev", {
-//   stage: environments.dev.name,
-//   env: {
-//     region: environments.dev.region,
-//     account: process.env.CDK_DEFAULT_ACCOUNT,
-//   },
-// }).addDependency(
-//   devStack,
-//   "Depends on codepipeline defined in this stack to be built"
-// );
-
-// new CiStack(app, "app-of-apps-apps-devs-ci-test", {
-//   stage: environments.test.name,
-//   env: {
-//     region: environments.test.region,
-//     account: process.env.CDK_DEFAULT_ACCOUNT,
-//   },
-//   branch: "test",
-// });
-
-// new CiStack(app, "app-of-apps-apps-devs-ci-prod", {
-//   stage: environments.prod.name,
-//   env: {
-//     region: environments.prod.region,
-//     account: process.env.CDK_DEFAULT_ACCOUNT,
-//   },
-//   branch: "prod",
-// });
 
 app.synth();
