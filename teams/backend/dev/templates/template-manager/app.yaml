@@ -3,29 +3,29 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::360300935709:role/bff-api-resources-core-st-podserviceaccountlinkedr-1RSDZRSO7PM9Z	
+    eks.amazonaws.com/role-arn: arn:aws:iam::360300935709:role/template-manager-resource-podserviceaccountlinkedr-5Q8NYAS9PKG0
     eks.amazonaws.com/sts-regional-endpoints: 'true'
-  name: bff-api-pods-sa
+  name: template-manager-pods-sa
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bff-api
+  name: template-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bff-api
+      app: template-manager
   template:
     metadata:
       labels:
-        service: bff-api
-        app: bff-api
+        service: template-manager
+        app: template-manager
     spec:
-      serviceAccountName: bff-api-pods-sa
+      serviceAccountName: template-manager-pods-sa
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:0208b4c498094fa7610fb509d413a92e2424b666
-          name: bff-api
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:ecfe5f2f7662dd3d04519c166906b254a3660f7b
+          name: template-manager
           resources:
             limits:
               cpu: 50m
@@ -49,19 +49,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: bff-api
+  name: template-manager
 spec:
   ports:
     - port: 8080
       protocol: TCP
   type: NodePort
   selector:
-    app: bff-api
+    app: template-manager
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: bff-api
+  name: template-manager
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/target-type: instance
@@ -70,7 +70,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/group.name: capstone
   labels:
-    app: bff-api
+    app: template-manager
 spec:
   rules:
     - http:
@@ -79,6 +79,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: bff-api
+                name: template-manager
                 port:
                   number: 8080

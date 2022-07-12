@@ -9,16 +9,16 @@
       "path": "../envs/dev"
     },
     {
-      "name": "@@frontend/cdk/gitops",
-      "path": "../teams/frontend/ci"
+      "name": "@@cdk/gitops",
+      "path": "../teams/backend/ci"
     },
     {
-      "name": "@@frontend/apps-manifests",
-      "path": "../teams/frontend/dev"
+      "name": "@@apps-manifests",
+      "path": "../teams/backend/dev"
     },
     {
-      "name": "@@frontend/image-updater",
-      "path": "../teams/frontend"
+      "name": "@@image-updater",
+      "path": "../teams/backend"
     }
   ],
   "settings": {

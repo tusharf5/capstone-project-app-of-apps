@@ -11,3 +11,15 @@ teams:
         path: teams/frontend/dev
     apps:
       bff: ''
+  backend:
+    metadata:
+      name: team-backend
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: team-backend
+      source:
+        repoURL: https://github.com/tusharf5/capstone-project-app-of-apps
+        targetRevision: main
+        path: teams/backend/dev
+    apps:
+      bff: ''
