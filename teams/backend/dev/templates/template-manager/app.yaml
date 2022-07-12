@@ -24,7 +24,7 @@ spec:
     spec:
       serviceAccountName: template-manager-pods-sa
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:ecfe5f2f7662dd3d04519c166906b254a3660f7b
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:0d83c82e8c3c4f5661de970c39786761c0afcadf
           name: template-manager
           resources:
             limits:
