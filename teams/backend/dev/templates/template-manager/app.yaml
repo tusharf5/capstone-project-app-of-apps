@@ -75,7 +75,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /bff
+          - path: /templates
             pathType: Prefix
             backend:
               service:
