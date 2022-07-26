@@ -27,6 +27,16 @@ spec:
         - name: persistent-storage
           persistentVolumeClaim:
             claimName: ebs-claim
+      initContainers:
+        - name: change-ownership-container
+          image: busybox:latest
+          command: ['/bin/chown', '-R', 'node:node', '/data']
+          securityContext:
+            runAsUser: 0
+            privileged: true
+          volumeMounts:
+            - name: persistent-storage
+              mountPath: /data
       containers:
         - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:736fcb4fb9e58c45196e824fc266f07d3dca76a7
           name: template-manager
@@ -108,3 +118,4 @@ spec:
   resources:
     requests:
       storage: 4Gi
+---
