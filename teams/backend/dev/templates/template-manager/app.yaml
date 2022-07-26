@@ -46,7 +46,7 @@ spec:
             - name: persistent-storage
               mountPath: /data
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:736fcb4fb9e58c45196e824fc266f07d3dca76a7
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:275e6eebc1fdfe27df4fbf9b9a70aea5e10d8af9
           name: template-manager
           volumeMounts:
             - name: persistent-storage
