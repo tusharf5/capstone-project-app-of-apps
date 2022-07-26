@@ -35,9 +35,9 @@ spec:
         - name: change-ownership-container
           image: busybox:latest
           command:
-            - /bin/chown
+            - /bin/chmod
             - '-R'
-            - node:node
+            - '777'
             - /data
           securityContext:
             runAsUser: 0
