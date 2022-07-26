@@ -28,7 +28,7 @@ spec:
           persistentVolumeClaim:
             claimName: ebs-claim
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:82b7697858a5c74ec83d881a650cea53db04627c
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:b74ae7654df57971c40daaf6dc2318688992850c
           name: template-manager
           volumeMounts:
             - name: persistent-storage
