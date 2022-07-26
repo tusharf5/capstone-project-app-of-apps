@@ -22,6 +22,10 @@ spec:
         service: template-manager
         app: template-manager
     spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+        runAsGroup: 1000
       serviceAccountName: template-manager-pods-sa
       volumes:
         - name: persistent-storage
