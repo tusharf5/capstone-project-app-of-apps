@@ -30,7 +30,11 @@ spec:
       initContainers:
         - name: change-ownership-container
           image: busybox:latest
-          command: ['/bin/chown', '-R', 'node:node', '/data']
+          command:
+            - /bin/chown
+            - '-R'
+            - node:node
+            - /data
           securityContext:
             runAsUser: 0
             privileged: true
@@ -118,4 +122,3 @@ spec:
   resources:
     requests:
       storage: 4Gi
----
