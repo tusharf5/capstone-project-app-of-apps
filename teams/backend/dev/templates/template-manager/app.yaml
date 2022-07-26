@@ -24,15 +24,15 @@ spec:
     spec:
       serviceAccountName: template-manager-pods-sa
       volumes:
-      - name: persistent-storage
-        persistentVolumeClaim:
-          claimName: ebs-claim      
+        - name: persistent-storage
+          persistentVolumeClaim:
+            claimName: ebs-claim
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:0d83c82e8c3c4f5661de970c39786761c0afcadf
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:82b7697858a5c74ec83d881a650cea53db04627c
           name: template-manager
           volumeMounts:
-          - name: persistent-storage
-            mountPath: /data          
+            - name: persistent-storage
+              mountPath: /data
           resources:
             limits:
               cpu: 50m
@@ -108,4 +108,3 @@ spec:
   resources:
     requests:
       storage: 4Gi
----      
