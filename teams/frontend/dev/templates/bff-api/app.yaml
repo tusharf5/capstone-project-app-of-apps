@@ -27,10 +27,10 @@ spec:
         - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:88302eb94d4fb7bc890d189a096f7ad526bbd190
           name: bff-api
           env:
+            - name: TEMPLATE_MANAGER_SERVICE_HOST
+              value: $(K8S_TEMPLATE_MANAGER_SERVICE_HOST)
             - name: TEMPLATE_MANAGER_SERVICE_PORT
-              value: $(TEMPLATE_MANAGER_SERVICE_HOST)
-            - name: TEMPLATE_MANAGER_SERVICE_PORT
-              value: $(TEMPLATE_MANAGER_SERVICE_PORT)
+              value: $(K8S_TEMPLATE_MANAGER_SERVICE_PORT)
           resources:
             limits:
               cpu: 50m
