@@ -83,31 +83,6 @@ spec:
   selector:
     app: template-manager
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: template-manager
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/target-type: instance
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
-    alb.ingress.kubernetes.io/backend-protocol: HTTP
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/group.name: capstone
-  labels:
-    app: template-manager
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /templates
-            pathType: Prefix
-            backend:
-              service:
-                name: template-manager
-                port:
-                  number: 8080
----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
