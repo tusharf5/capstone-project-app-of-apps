@@ -6,7 +6,7 @@ const configFile = require("./config.json");
 const required_env_variables = [
   {
     configPath: ["dockerImageURI"],
-    kind: "Deployment",
+    kind: "Rollout",
     filePath: "./dev/templates/template-manager/app.yaml",
     keyPath: ["spec", "template", "spec", "containers", 0],
     key: "image",
