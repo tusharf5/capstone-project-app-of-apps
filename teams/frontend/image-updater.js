@@ -69,7 +69,11 @@ try {
 
       fs.appendFileSync(
         path.join(__dirname, toReplace.filePath),
-        yaml.dump(doc, {lineWidth: -1}),
+        yaml.dump(doc, {
+          lineWidth: -1,
+          forceQuotes: false,
+          quotingType: undefined,
+        }),
         {
           encoding: "utf-8",
         }
