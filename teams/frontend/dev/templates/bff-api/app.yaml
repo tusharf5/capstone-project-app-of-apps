@@ -24,7 +24,7 @@ spec:
     spec:
       serviceAccountName: bff-api-pods-sa
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:bea931f110a83cbf3f45311caff9dabac96a1e82
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-bff-api:df4d5ba6c789a58eb759fd371b64737abf23ef26
           name: bff-api
           env:
             - name: TEMPLATE_MANAGER_SERVICE
