@@ -7,15 +7,21 @@ metadata:
     eks.amazonaws.com/sts-regional-endpoints: 'true'
   name: template-manager-pods-sa
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
-  name: template-manager
+  name: template-manager-rollout
 spec:
   replicas: 1
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: template-manager
+  strategy:
+    blueGreen: 
+      activeService: template-manager
+      previewService: template-manager-preview
+      autoPromotionEnabled: true      
   template:
     metadata:
       labels:
@@ -75,6 +81,18 @@ apiVersion: v1
 kind: Service
 metadata:
   name: template-manager
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app: template-manager
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: template-manager-preview
 spec:
   ports:
     - port: 8080
