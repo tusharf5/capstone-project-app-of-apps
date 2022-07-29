@@ -18,10 +18,10 @@ spec:
     matchLabels:
       app: template-manager
   strategy:
-    blueGreen: 
+    blueGreen:
       activeService: template-manager
       previewService: template-manager-preview
-      autoPromotionEnabled: true      
+      autoPromotionEnabled: true
   template:
     metadata:
       labels:
@@ -52,7 +52,7 @@ spec:
             - name: persistent-storage
               mountPath: /data
       containers:
-        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:84a6cbb387f525f4eee154fdca629be729c8c5bb
+        - image: 360300935709.dkr.ecr.us-west-2.amazonaws.com/dev-template-manager:db7a12ca32c0458425a6778483b170e11847733a
           name: template-manager
           volumeMounts:
             - name: persistent-storage
